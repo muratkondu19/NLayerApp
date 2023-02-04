@@ -49,6 +49,10 @@ namespace NLayer.Repository
             //tek bir tanesi uygulanmak istenirse
             //modelBuilder.ApplyConfiguration(new ProductConfiguration());
 
+            //Seed işleminin OnModelCreating içerisinde tanımlanması örneği, best practices olarak seed klasöründen yapılmalıdır
+            modelBuilder.Entity<ProductFeature>().HasData(
+                new ProductFeature { Id = 1, Color = "Kırmızı", Height = 100, Width = 200, ProductId = 4 },
+                new ProductFeature { Id = 2, Color = "Mavi", Height = 120, Width = 10, ProductId = 2 });
 
             base.OnModelCreating(modelBuilder);
         }

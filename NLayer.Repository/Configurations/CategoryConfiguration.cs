@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace NLayer.Repository.Configurations
 {
     //IEntityTypeConfiguration iplemente edilmelidir
-    internal class CategoryConfiguration : IEntityTypeConfiguration<Product>
+    internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
             //Entity configurasyonları burada yapılır
             builder.HasKey(x => x.Id); //Id değerinin belirtilmesi

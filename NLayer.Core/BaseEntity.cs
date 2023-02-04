@@ -15,6 +15,7 @@ namespace NLayer.Core
         //interface'lerde de genellikle kontrat ve sözleşmeler tanımlanır 
         public int Id { get; set; } 
         public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        //DB'ye ilk kayıtta null olması gerektiğinden ? olarak belirtilir.
+        public DateTime? UpdatedDate { get; set; }
     }
 }
