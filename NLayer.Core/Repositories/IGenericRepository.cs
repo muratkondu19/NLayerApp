@@ -23,7 +23,7 @@ namespace NLayer.Core.Repositories
         Task<T> GetByIdAsync(int id);
 
         //productRepository.GetAll(x=>x.id>5).orderBu.tolist -> ne zaman to list çağırılırsa veritabanına o zaman sorgu atılır
-        IQueryable<T> GetAll(Expression<Func<T, bool>> expression);
+        IQueryable<T> GetAll();
 
         /*IQueryable dönüldüğünde yazılan sorgular direkt olarak veritabanına gitmez mutlaka ToList gibi metotlar çağırılınca veritabanına gider
         productRepository.where(x=>x.id>5) buraya kadar olan kısımdan IQueryable döner veritabanına sorgu yapılmaz 

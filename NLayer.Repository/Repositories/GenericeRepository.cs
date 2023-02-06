@@ -54,7 +54,7 @@ namespace NLayer.Repository.Repositories
             return await _dbSet.AnyAsync(expression);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             //AsNoTracking-> EF Core çektiği dataları memory'e almaması için yazılır daha performanslı çalışma için 
             //bu kullanılmaz ise 1000 data çekildiğinde bunu hafızaya alır ve anlık olarak durumlarını izler, bu da uygulamanın perofmrmasını düşürür

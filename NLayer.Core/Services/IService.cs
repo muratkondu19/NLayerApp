@@ -27,7 +27,7 @@ namespace NLayer.Core.Services
         Task<IEnumerable<T>> GetAllAsync();
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
         Task<T> AddAsync(T entity);
-        Task<T> AddRangeAsync(IEnumerable<T> entity);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
 
         //Repository void update işleminden farklı olarak serviste veritabanına bu değişikliklerin yansıtılacağı için 
