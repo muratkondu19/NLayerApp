@@ -24,6 +24,6 @@ namespace NLayer.Core.UnitOfWorks
     public interface IUnitOfWork
     {
         Task CommitAsync(); //SaveChaneAsync 
-        void Commitc(); //SaveChange
+        void Commit(); //SaveChange
     }
 }
