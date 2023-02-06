@@ -37,10 +37,10 @@ namespace NLayer.Core.Repositories
         */
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
 
-        Task<T> AddAsync(T entity);
+        Task AddAsync(T entity);
 
         //IEnumerable classını impelemente etmiş her class'a cast edilebilir
-        Task<T> AddRangeAsync(IEnumerable<T> entity);
+        Task AddRangeAsync(IEnumerable<T> entity);
 
         //Bir metot async ise sonuna async eklenmesi belirtilmesi açısından önemlidir. 
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
