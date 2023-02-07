@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
+using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
 using NLayer.Repository;
 using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWork;
+using NLayer.Service.Mapping;
+using NLayer.Service.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +38,11 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //sadece bir adet T entitiy generiz aldýðý için <> yeterli fakat çoklu olsaydý <,> her biri için , eklenecekti
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericeRepository<>));
-//builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+
+
+//Auto mapperýn eklenmesi
+builder.Services.AddAutoMapper(typeof(MapProfile)); //MapProfile'ýn bulunduðu assembly'i typeof ile bulabilir
 
 var app = builder.Build();
 
