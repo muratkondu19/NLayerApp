@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayer.Core
+namespace NLayer.Core.Models
 {
     //Bu entity product'a bağlı olduğu için BaseEntity tanımlanmamıştır.
     public class ProductFeature

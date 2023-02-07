@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayer.Core
+namespace NLayer.Core.Models
 {
     //Tüm tablolarda olması gereken sütunlar için kullanılacaktır.
     public abstract class BaseEntity
@@ -13,7 +13,7 @@ namespace NLayer.Core
         //abstract'lar ve interace'ler soyut nesnelerdir new ile yeni bir nesne oluşturulamaz
         //abstract class'lar genelde projede ortak olan prop ve metotları tanımladığımız yerlerdir
         //interface'lerde de genellikle kontrat ve sözleşmeler tanımlanır 
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
         //DB'ye ilk kayıtta null olması gerektiğinden ? olarak belirtilir.
         public DateTime? UpdatedDate { get; set; }
