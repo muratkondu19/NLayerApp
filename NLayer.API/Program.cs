@@ -1,5 +1,7 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NLayer.API.Filters;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -15,7 +17,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddFluentValidation(x=>x.RegisterValidatorsFromAssemblyContaining<ProductDtoValidator>());
+builder.Services.AddControllers(options =>  options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProductDtoValidator>());
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    //invalid filterý baskýla = true
+    //framework'un döndüðü kendi model filtresini baskýlayarak yazýlan filtrenin kullanýlmasýný ve custom reponse dönmesini saðlama
+    options.SuppressModelStateInvalidFilter = true;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,8 +47,8 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 //generic olanlar typeopf ile kullanýlýr
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //sadece bir adet T entitiy generiz aldýðý için <> yeterli fakat çoklu olsaydý <,> her biri için , eklenecekti
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericeRepository<>));
-builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericeRepository<>));
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
 //Auto mapperýn eklenmesi
 builder.Services.AddAutoMapper(typeof(MapProfile)); //MapProfile'ýn bulunduðu assembly'i typeof ile bulabilir
