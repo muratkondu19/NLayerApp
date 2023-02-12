@@ -13,11 +13,23 @@ namespace NLayer.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IService<Product> _service;
+        private readonly IProductService productService;
 
-        public ProductsController(IMapper mapper, IService<Product> service)
+        public ProductsController(IMapper mapper, IService<Product> service, IProductService productService)
         {
             _mapper = mapper;
             _service = service;
+            this.productService = productService;
+        }
+
+
+        //[HttpGet("GetProductsWithCategory")] //api/product/GetProductsWithCategory olarak çağırılacak / çakışmayı önlemek için
+        [HttpGet("[action]")] //ile isim vermeden de kullanabiliriz action metodun ismini alır
+        public async Task<IActionResult> GetProductsWithCategory()
+        {
+            //özelleştirilmiş bir servis olduğunda dto döndüğünden generic olmadığından apinin istediği data direkt olarak dönüyor
+            //diğer metodlarda generic olmasından doalyı map işlemi gerekmektedir
+            return CreateActionResult(await productService.GetProductsWithCategory());
         }
 
         [HttpGet]
