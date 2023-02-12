@@ -7,8 +7,9 @@ using NLayer.Core.Services;
 
 namespace NLayer.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    //Route bilgileri CustomBaseController da yer aldığı için kaldırılıur
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class ProductsController : CustomBaseController
     {
         private readonly IMapper _mapper;

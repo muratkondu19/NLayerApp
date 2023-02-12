@@ -17,7 +17,7 @@ namespace NLayer.Core.Services
          */
         //Task<List<ProductWithCategoryDto>> GetProductListCategory();
         //Best practices için kullanım
-        Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory();
+        public Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory();
         //tam olarak apinin istediği datayı dönmektedir
     }
 }
