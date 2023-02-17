@@ -30,6 +30,7 @@ namespace NLayer.API.Middlewares
                     {
                         //Hatanın tipi ClientSide ise 400 değilse 500 
                         ClientSideException => 400,
+                        NotFoundException => 404,
                         _ => 500
                     };
                     context.Response.StatusCode = statusCode;
