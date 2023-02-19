@@ -1,8 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
+using NLayer.API.Modules;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -48,19 +51,27 @@ builder.Services.AddDbContext<AppDbContext>(x =>
  */
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 //Migration yapýlmasý için repo ve implementasyonlarýn eklenmesi
-//generic olanlar typeopf ile kullanýlýr
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//sadece bir adet T entitiy generiz aldýðý için <> yeterli fakat çoklu olsaydý <,> her biri için , eklenecekti
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericeRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+////generic olanlar typeopf ile kullanýlýr
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+////sadece bir adet T entitiy generiz aldýðý için <> yeterli fakat çoklu olsaydý <,> her biri için , eklenecekti
+//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericeRepository<>));
+//builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
 //Auto mapperýn eklenmesi
 builder.Services.AddAutoMapper(typeof(MapProfile)); //MapProfile'ýn bulunduðu assembly'i typeof ile bulabilir
 
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
-//builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
+////builder.Services.AddScoped<IProductRepository, ProductRepository>();
+////builder.Services.AddScoped<IProductService, ProductService>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+//builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+//AutoFac'in projeye dahil edilmesi
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+//Modül eklenerek dinamik olarak ekleme iþlemlerinin yapýlmasý
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+{
+    containerBuilder.RegisterModule(new RepoServiceModule());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
