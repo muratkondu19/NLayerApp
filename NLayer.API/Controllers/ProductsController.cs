@@ -43,6 +43,10 @@ namespace NLayer.API.Controllers
             return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDto));
         }
 
+        /*
+         * NotFoundFilter bir attribute class’ını miraas almadığı için attribute olarak yazılarak kullanılamaz. NotFoundFilter dinamik olarak T aldığında ve ctor’un da bir parametre geçtiğinden direkt olarak kapalı parantezlerle kullanılamaz bunun yerine service filter üzerinden kullanmak gerekir. 
+         */
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")] //apiproduct/5 ->id 5 olan data gelir
         public async Task<IActionResult> GetById(int id)
         {

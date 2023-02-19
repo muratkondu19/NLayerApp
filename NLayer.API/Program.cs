@@ -43,7 +43,10 @@ builder.Services.AddDbContext<AppDbContext>(x =>
             options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
         });
 });
-
+/*
+ * Eðer bir filter’ýn ctor’unda herhangi bir servisi ya da herhangi bir class’ý kullanýyorsa bunun startup tarafýna da eklenmesi gerekmektedir. 
+ */
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 //Migration yapýlmasý için repo ve implementasyonlarýn eklenmesi
 //generic olanlar typeopf ile kullanýlýr
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
