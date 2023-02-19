@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using NLayer.Caching;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -36,6 +37,9 @@ namespace NLayer.API.Modules
 
             //sınıflardan Service ile bitenleri al ve o sınıflara karşılık gelen interface'leri al 
             builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, apiAssembly).Where(x => x.Name.EndsWith("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();
+
+            //IProductService interface gördüğün zaman Product Service değil ProductServiceWithCaching'in nesne örneğini al
+            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
         }
     }
 }

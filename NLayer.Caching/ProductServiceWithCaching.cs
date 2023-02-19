@@ -43,7 +43,7 @@ namespace NLayer.Caching
             if (!_memoryCache.TryGetValue(CacheProductKey, out _))
             {
                 //Cache de veri yoksa oluşturacak
-                _memoryCache.Set(CacheProductKey, _productRepository.GetProductsWithCategoryAsync());
+                _memoryCache.Set(CacheProductKey, _productRepository.GetProductsWithCategoryAsync().Result);
             }
         }
 
