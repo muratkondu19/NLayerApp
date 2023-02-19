@@ -32,6 +32,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Cache iþleminin aktif edilmesi
+builder.Services.AddMemoryCache();
+
 //appsetting.jsonda yer alan connection string için
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -72,6 +75,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new RepoServiceModule());
 });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
