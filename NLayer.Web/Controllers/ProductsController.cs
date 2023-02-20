@@ -32,8 +32,8 @@ namespace NLayer.Web.Controllers
 
         public async Task<IActionResult> Save()
         {
-            var categories = _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
+            var categories = await _categoryService.GetAllAsync();
+            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
             //Kullanılacı Name görerek onu seçecek Id değeri gönderilecek
             ViewBag.categories = new SelectList(categoriesDto, "Id", "Name");
@@ -49,8 +49,8 @@ namespace NLayer.Web.Controllers
                 await _productService.AddAsync(_mapper.Map<Product>(product));
                 return RedirectToAction(nameof(Index));
             }
-            var categories = _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
+            var categories = await _categoryService.GetAllAsync();
+            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
             //Kullanılacı Name görerek onu seçecek Id değeri gönderilecek
             ViewBag.categories = new SelectList(categoriesDto, "Id", "Name");
