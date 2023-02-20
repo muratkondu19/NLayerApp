@@ -8,6 +8,7 @@ using NLayer.Service.Mapping;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.Service.Validations;
+using NLayer.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,8 @@ builder.Services.AddDbContext<AppDbContext>(x =>
         });
 });
 
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
+
 //Auto mapperýn eklenmesi
 builder.Services.AddAutoMapper(typeof(MapProfile)); //MapProfile'ýn bulunduðu assembly'i typeof ile bulabilir
 
@@ -46,7 +49,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new RepoServiceModule());
 });
 var app = builder.Build();
-
+app.UseExceptionHandler("/Home/Error");
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

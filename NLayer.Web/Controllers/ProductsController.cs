@@ -57,7 +57,7 @@ namespace NLayer.Web.Controllers
             //İşlem başarısız ise category tekrar yüklenerek aynı sayfaya yeniden döner. 
             return View();
         }
-
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         public async Task<IActionResult> Update(int id)
         {
             var product = await _productService.GetByIdAsync(id);
@@ -67,7 +67,7 @@ namespace NLayer.Web.Controllers
 
             //Kullanılacı Name görerek onu seçecek Id değeri gönderilecek,seçilen değer 
             ViewBag.categories = new SelectList(categoriesDto, "Id", "Name",product.CategoryId);
-            return View(_mapper.Map<ProductDto>(product);
+            return View(_mapper.Map<ProductDto>(product));
         }
         [HttpPost]
         public async Task<IActionResult> Update(ProductDto productDto)
