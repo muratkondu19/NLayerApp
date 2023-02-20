@@ -5,11 +5,20 @@ using Microsoft.EntityFrameworkCore;
 using NLayer.Repository;
 using System.Reflection;
 using NLayer.Service.Mapping;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using NLayer.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProductDtoValidator>());
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    //invalid filterý baskýla = true
+    //framework'un döndüðü kendi model filtresini baskýlayarak yazýlan filtrenin kullanýlmasýný ve custom reponse dönmesini saðlama
+    options.SuppressModelStateInvalidFilter = true;
+}); ;
 
 //appsetting.jsonda yer alan connection string için
 builder.Services.AddDbContext<AppDbContext>(x =>
