@@ -85,5 +85,12 @@ namespace NLayer.Web.Controllers
             //İşlem başarısız ise category tekrar yüklenerek aynı sayfaya yeniden döner. 
             return View(productDto);
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var product = await _productService.GetByIdAsync(id);
+            await _productService.RemoveAsync(product);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
