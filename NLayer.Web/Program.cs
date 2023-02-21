@@ -9,6 +9,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.Service.Validations;
 using NLayer.Web;
+using NLayer.Web.Serivces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,15 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new RepoServiceModule());
+});
+
+builder.Services.AddHttpClient<ProductApiService>(options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["baseUrl"]);
+});
+builder.Services.AddHttpClient<CategoryApiService>(options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["baseUrl"]);
 });
 var app = builder.Build();
 app.UseExceptionHandler("/Home/Error");
