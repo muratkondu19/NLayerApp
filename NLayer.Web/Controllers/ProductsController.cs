@@ -27,7 +27,7 @@ namespace NLayer.Web.Controllers
             //Durum kodları response üzerinden kaldırıldı
             //API katmanında hata alınmaması için Unload edildi
             //Cache aktif olmadığı için dosya adı değiştirildi. 
-            return View(await _productService.GetProductsWithCategory());
+            return View((await _productService.GetProductsWithCategory()).Data);
         }
 
         public async Task<IActionResult> Save()

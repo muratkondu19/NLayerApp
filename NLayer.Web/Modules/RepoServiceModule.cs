@@ -19,7 +19,7 @@ namespace NLayer.Web.Modules
         {
             //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericeRepository<>)); -mevcutta kullanılan
             //builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));  -mevcutta kullanılan
-            builder.RegisterGeneric(typeof(GenericeRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(IGenericeRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerLifetimeScope();
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  -mevcutta kullanılan
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();

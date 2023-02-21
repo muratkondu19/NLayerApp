@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Repository.Repositories
 {
-    public class CategoryRepository : GenericeRepository<Category>, ICategoryRepository
+    public class CategoryRepository : IGenericeRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(AppDbContext context) : base(context)
         {

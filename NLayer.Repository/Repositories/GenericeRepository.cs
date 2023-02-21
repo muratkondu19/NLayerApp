@@ -11,7 +11,7 @@ namespace NLayer.Repository.Repositories
 {
     //Yazılan crud operasyonlarının tüm entity'ler için geçerli olması için generic ön eki verilmiştir.
     //IGenericRepository' Core üzerinden implemente edilmiştir
-    public class GenericeRepository<T> : IGenericRepository<T> where T : class
+    public class IGenericeRepository<T> : IGenericRepository<T> where T : class
     {
         //Db ile işlem yapabilmek için DbContext nesine ihtiyaç vardır 
         /*protexted yapma sebebi-> product sınıfına ait bu temel crud operasyonları dışında extra ayrı metotlara ihtiyaç olursa 
@@ -33,7 +33,7 @@ namespace NLayer.Repository.Repositories
         private readonly DbSet<T> _dbSet;
 
         //readonly olanların ctorda değer atanması
-        public GenericeRepository(AppDbContext context)
+        public IGenericeRepository(AppDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>(); //_context.Set<T>()->burası bir db set döner ve generic olarak DbSet<T> beklendiği için isteği karşılar 

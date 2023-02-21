@@ -12,7 +12,7 @@ namespace NLayer.Repository.Repositories
     /*
      * Temel crud operasyonları tekrar yazmamak için GenericeRepository implemente edilir
      */
-    public class ProductRepository : GenericeRepository<Product>, IProductRepository
+    public class ProductRepository : IGenericeRepository<Product>, IProductRepository
     {
         public ProductRepository(AppDbContext context) : base(context)
         {

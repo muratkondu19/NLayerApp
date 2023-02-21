@@ -20,7 +20,7 @@ namespace NLayer.API.Modules
         {
             //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericeRepository<>)); -mevcutta kullanılan
             //builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));  -mevcutta kullanılan
-            builder.RegisterGeneric(typeof(GenericeRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(IGenericeRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerLifetimeScope();
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  -mevcutta kullanılan
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
@@ -39,7 +39,7 @@ namespace NLayer.API.Modules
             builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, apiAssembly).Where(x => x.Name.EndsWith("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             //IProductService interface gördüğün zaman Product Service değil ProductServiceWithCaching'in nesne örneğini al
-            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
+            //builder.RegisterType<ProductServiceWithCaching>().As<IProductService>(); //Kapalıysa cacheden okumayıp dbden okur
         }
     }
 }
